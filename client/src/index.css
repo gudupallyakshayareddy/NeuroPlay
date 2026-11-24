@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens. Values are "R G B" so Tailwind can add opacity (bg-violet/20). */
+:root {
+  --void: 5 6 15;
+  --navy: 10 14 31;
+  --panel: 15 21 48;
+  --ink: 232 234 255;
+  --dim: 154 163 199;
+  --violet: 124 92 255;
+  --violet-soft: 166 139 255;
+  --cyan: 34 211 238;
+  --success: 52 211 153;
+  --warn: 251 191 36;
+  --danger: 248 113 113;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-void font-sans text-ink antialiased;
+    min-height: 100vh;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: rgb(var(--violet) / 0.5);
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--cyan));
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  .glass {
+    background: rgb(var(--panel) / 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgb(139 148 255 / 0.14);
+  }
+  .glass-hover {
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .glass-hover:hover {
+    transform: translateY(-4px);
+    border-color: rgb(var(--violet) / 0.6);
+    box-shadow: 0 12px 40px -12px rgb(var(--violet) / 0.45);
+  }
+  .text-gradient {
+    background: linear-gradient(90deg, rgb(var(--violet-soft)), rgb(var(--cyan)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .section-pad {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
